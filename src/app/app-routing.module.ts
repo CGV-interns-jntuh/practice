@@ -77,7 +77,9 @@ import { CampusBuildingsComponent } from './features/campus-buildings/campus-bui
 import { WwCommentSubcodesComponent } from './features/ww-comment-subcodes/ww-comment-subcodes.component';
 import { WwCustomerAddressesComponent } from './features/ww-customer-addresses/ww-customer-addresses.component';
 import { AccountSelectionComponent } from './features/account-selection/account-selection.component';
-
+import { CustomersComponent } from './features/customers/customers.component';
+import { CustomerCreateComponent } from './features/customers/customer-create/customer-create.component';
+import { CustomerUpdateComponent } from './features/customers/customer-update/customer-update.component';
 const routes: Routes = [
   {
     path: 'receive',
@@ -97,14 +99,26 @@ const routes: Routes = [
         (m) => m.BuildingsModule
       ),
   },
-  
+
   {
     path: 'main-nav',
     component: MainNavComponent,
-    children:[
+    children: [
       {
         path: 'tallys/read',
         component: TallysComponent,
+      },
+      {
+        path: 'customers/read',
+        component: CustomersComponent,
+      },
+      {
+        path: 'customers/add',
+        component: CustomerCreateComponent,
+      },
+      {
+        path: 'customers/update',
+        component: CustomerUpdateComponent,
       },
       {
         path: 'tallys/add',
@@ -114,7 +128,7 @@ const routes: Routes = [
         path: 'tallys/update',
         component: UpdateComponent,
       },
-    
+
       {
         path: 'tallys/comments/:id',
         component: CommentsComponent,
@@ -191,7 +205,7 @@ const routes: Routes = [
         path: 'map-location/read',
         component: MapLocationComponent,
       },
-    
+
       {
         path: 'mapzone/read',
         component: MapZonesComponent,
@@ -208,13 +222,12 @@ const routes: Routes = [
         path: 'exitpoint/read',
         component: ExitPointsComponent,
       },
-    
-    
+
       {
         path: 'carrier/read',
         component: CarriersComponent,
       },
-    
+
       {
         path: 'orders/read',
         component: OrdersComponent,
@@ -256,16 +269,15 @@ const routes: Routes = [
         component: ReceivableDetailsComponent,
       },
 
-      { path: 'receive/staging',    component: InboundStagingComponent },
-       { path: 'receive/putaway', component: InboundPutawayComponent },
-       { path: 'receive/onestep',    component: InboundOnestepComponent },
+      { path: 'receive/staging', component: InboundStagingComponent },
+      { path: 'receive/putaway', component: InboundPutawayComponent },
+      { path: 'receive/onestep', component: InboundOnestepComponent },
 
-       {
+      {
         path: 'action/read',
         component: ActionRsmsComponent,
       },
 
-      
       {
         path: 'application/read',
         component: ApplicationsComponent,
@@ -389,11 +401,9 @@ const routes: Routes = [
         path: 'customer-addresses/read',
         component: WwCustomerAddressesComponent,
       },
-
-    ]
+    ],
   },
-  
-  
+
   {
     path: '',
     component: LoginComponent,
@@ -403,7 +413,6 @@ const routes: Routes = [
     path: 'accountSelection',
     component: AccountSelectionComponent,
   },
-  
 
   {
     path: 'orders',
@@ -421,8 +430,7 @@ const routes: Routes = [
     path: 'auth',
     loadChildren: () =>
       import('./features/auth/auth.module').then((m) => m.AuthModule),
-  }
-
+  },
 ];
 
 @NgModule({

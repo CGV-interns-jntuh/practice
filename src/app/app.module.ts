@@ -360,6 +360,9 @@ import { CustomerAddressesAddComponent } from './features/ww-customer-addresses/
 import { CustomerAddressesChangeComponent } from './features/ww-customer-addresses/customer-addresses-change/customer-addresses-change.component';
 import { MapCrossReferenceComponent } from './features/map-location/map-cross-reference/map-cross-reference.component';
 import { AccountSelectionComponent } from './features/account-selection/account-selection.component';
+import { CustomersComponent } from './features/customers/customers.component';
+import { CustomerCreateComponent } from './features/customers/customer-create/customer-create.component';
+import { CustomerUpdateComponent } from './features/customers/customer-update/customer-update.component';
 
 
 @NgModule({
@@ -680,7 +683,10 @@ import { AccountSelectionComponent } from './features/account-selection/account-
     CustomerAddressesAddComponent,
     CustomerAddressesChangeComponent,
     MapCrossReferenceComponent,
-    AccountSelectionComponent
+    AccountSelectionComponent,
+    CustomersComponent,
+    CustomerCreateComponent,
+    CustomerUpdateComponent
   ],
   exports: [MatDatepickerModule, MatNativeDateModule],
   providers: [MatDatepickerModule],

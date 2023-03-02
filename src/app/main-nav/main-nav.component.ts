@@ -12,98 +12,90 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./main-nav.component.css'],
 })
 export class MainNavComponent implements OnInit {
- 
+  isLoggedIn: boolean = LoginComponent.isLoggedIn;
+  isLoggedOut: boolean = LoginComponent.isLoggedOut;
+  loggedUser: any;
 
-  isLoggedIn:boolean = LoginComponent.isLoggedIn;
-  isLoggedOut:boolean = LoginComponent.isLoggedOut;
-  loggedUser:any;
-   
-   
   //console.log(this.isLoggedIn);
-  
+
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
     .pipe(
       map((result) => result.matches),
       shareReplay()
     );
- 
-  constructor(private breakpointObserver: BreakpointObserver, private router: Router,  
-    private route: ActivatedRoute,) {
-    
-  }
-  ngOnInit() {
-     
-   this.loggedUser= localStorage.getItem('LoggedIn');
-   console.log('asdassdfsdgfgd',localStorage.getItem('LoggedIn'))
-         //    this.router.navigate(['/tallys/read']);
-          
 
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
+  ngOnInit() {
+    this.loggedUser = localStorage.getItem('LoggedIn');
+    console.log('asdassdfsdgfgd', localStorage.getItem('LoggedIn'));
+    //    this.router.navigate(['/tallys/read']);
   }
-  Logout(){
-    localStorage.removeItem('LoggedIn')
-    localStorage.removeItem('userName')
-    localStorage.removeItem('building')
-    localStorage.removeItem('storer')
-    localStorage.removeItem('storerSuffix')
+  Logout() {
+    localStorage.removeItem('LoggedIn');
+    localStorage.removeItem('userName');
+    localStorage.removeItem('building');
+    localStorage.removeItem('storer');
+    localStorage.removeItem('storerSuffix');
     this.router.navigateByUrl('/');
   }
-  
-
-  
 
   isExpanded = true;
   showreceviceSubmenu: boolean = false;
   showorderSubmenu: boolean = false;
   showtallysSubmenu: boolean = false;
+  showcustomersSubmenu: boolean = false;
   showshippingSubmenu: boolean = false;
   showstorerSubmenu: boolean = false;
   showBuildingSubmenu: boolean = false;
   showMapZoneSubmenu: boolean = false;
   showMapLocationSubMenu: boolean = false;
-  showCarrierSubmenu:boolean=false;
-  showItemSubmenu:boolean=false;
-  showConsigneeSubmenu :boolean =false;
-  showExitPointSubmenu :boolean =false;
-  showMoveQueueSubmenu :boolean =false;
-  showPostalAbbreviations:boolean=false;
-  showReceivables:boolean=false;
-  showWorkWithActionsRsms:boolean=false;
-  showWorkWithApplication:boolean=false;
-  showControllBatchFile:boolean=false;
-  showAuditHeaders:boolean=false;
-  showBoxContent:boolean=false;
+  showCarrierSubmenu: boolean = false;
+  showItemSubmenu: boolean = false;
+  showConsigneeSubmenu: boolean = false;
+  showExitPointSubmenu: boolean = false;
+  showMoveQueueSubmenu: boolean = false;
+  showPostalAbbreviations: boolean = false;
+  showReceivables: boolean = false;
+  showWorkWithActionsRsms: boolean = false;
+  showWorkWithApplication: boolean = false;
+  showControllBatchFile: boolean = false;
+  showAuditHeaders: boolean = false;
+  showBoxContent: boolean = false;
   showAccountProcessing: boolean = false;
   showActivityDescription: boolean = false;
-  showBalanceErrors:boolean=false;
-  showInventoryBooks:boolean=false;
-  showAddressTypes:boolean=false;
+  showBalanceErrors: boolean = false;
+  showInventoryBooks: boolean = false;
+  showAddressTypes: boolean = false;
   showInventoryTagSubmenu: boolean = false;
-  showOrderStagingBatches:boolean = false;
-  showDockSchedules:boolean=false;
-  showLtlBatches:boolean=false;
-  showBookDetails:boolean=false;
-  showWorkWithBoxes:boolean=false;
-  showMasterSerialList:boolean=false;
-  showHazardousChemicals:boolean=false;
-  showSystemComments:boolean=false;
-  showSerializedInventories:boolean=false;
-  showCarrierEdiDocuments:boolean=false;
-  showWorkWithContents:boolean=false;
+  showOrderStagingBatches: boolean = false;
+  showDockSchedules: boolean = false;
+  showLtlBatches: boolean = false;
+  showBookDetails: boolean = false;
+  showWorkWithBoxes: boolean = false;
+  showMasterSerialList: boolean = false;
+  showHazardousChemicals: boolean = false;
+  showSystemComments: boolean = false;
+  showSerializedInventories: boolean = false;
+  showCarrierEdiDocuments: boolean = false;
+  showWorkWithContents: boolean = false;
   showCommodityPrinters: boolean = false;
   showFiles: boolean = false;
   showcampusBuildings: boolean = false;
-  showCommentSubcodes:boolean = false;
-  showCustomerAddresses:boolean=false;
-  
+  showCommentSubcodes: boolean = false;
+  showCustomerAddresses: boolean = false;
 
-  
-  
   isShowing = false;
   receviedisplay = 'none';
   receviedirection = '';
   tallysdisplay = 'none';
   tallysdirection = '';
+  customersdisplay = 'none';
+  customersdirection = '';
   carrierdisplay = 'none';
   carrierdirection = '';
   ordersdisplay = 'none';
@@ -116,85 +108,173 @@ export class MainNavComponent implements OnInit {
   storerdirection = '';
   buildingdisplay = 'none';
   buildingdirection = '';
-  mapLocationDispaly='none';
-  mapLocationDirection='';
-  itemdisplay='none';
-  itemdirection=''
-  consigneeDisplay='none';
-  consigneeDirection='';
-  exitPointDisplay='none';
-  exitPointDirection='';
-  moveQueueDisplay='none';
-  moveQueueDirection='';
-  postalAbbreviationsDisplay='none';
-  postalAbbreviationsDirection='';
-  receivablesDisplay='none';
-  receivablesDirection='';
-  actionRsmsDisplay='none';
-  actionRsmsDirection='';
-  applicationDisplay='none';
-  applicationDirection='';
-  controllBatchFileDisplay='none';
-  controllBatchFileDirection=''
-  auditHeaderDisplay='none';
-  auditHeaderDirection='';
-  boxContentDisplay='none';
-  boxContentDirection='';
+  mapLocationDispaly = 'none';
+  mapLocationDirection = '';
+  itemdisplay = 'none';
+  itemdirection = '';
+  consigneeDisplay = 'none';
+  consigneeDirection = '';
+  exitPointDisplay = 'none';
+  exitPointDirection = '';
+  moveQueueDisplay = 'none';
+  moveQueueDirection = '';
+  postalAbbreviationsDisplay = 'none';
+  postalAbbreviationsDirection = '';
+  receivablesDisplay = 'none';
+  receivablesDirection = '';
+  actionRsmsDisplay = 'none';
+  actionRsmsDirection = '';
+  applicationDisplay = 'none';
+  applicationDirection = '';
+  controllBatchFileDisplay = 'none';
+  controllBatchFileDirection = '';
+  auditHeaderDisplay = 'none';
+  auditHeaderDirection = '';
+  boxContentDisplay = 'none';
+  boxContentDirection = '';
   AccountProcessingDisplay = 'none';
   AccountProcessingDirection = '';
   ActivityDescriptionDisplay = 'none';
   ActivityDescriptionDirection = '';
-  balanceErrorDisplay ='none';
-  balanceErrorDirection='';
-  inventoryBooksDisplay='none';
-  inventoryBooksDirection='';
-  addressTypeDisplay='none';
-  addressTypeDirection='';
+  balanceErrorDisplay = 'none';
+  balanceErrorDirection = '';
+  inventoryBooksDisplay = 'none';
+  inventoryBooksDirection = '';
+  addressTypeDisplay = 'none';
+  addressTypeDirection = '';
   inventoryTagDisplay = 'none';
   inventoryTagDirection = '';
   orderStagingBatchesDisplay = 'none';
-  orderStagingBatchesDirection='';
-  dockScheduleDisplay='none';
-  dockScheduleDirection='';
-  ltlBatchesDisplay='none';
-  ltlBatchesDirection='';
-  bookDetailsDisplay='none';
-  bookDetailsDirection='';
-  boxDisplay='none';
-  boxDirection='';
-  masterSerialListDisplay='none';
-  masterSerialListDirection='';
-  hazardousChemicalsDisplay='none';
-  hazardousChemicalsDirection='';
-  systemCommentsDisplay='none';
-  systemCommentsDirection='';
-  serializedInventoriesDisplay='none';
-  serializedInventoriesDirection='';
-  carrierEdiDocumentDisplay='none';
-  carrierEdiDocumentDirection='';
-  contentsDisplay='none';
-  contentsDirection='';
+  orderStagingBatchesDirection = '';
+  dockScheduleDisplay = 'none';
+  dockScheduleDirection = '';
+  ltlBatchesDisplay = 'none';
+  ltlBatchesDirection = '';
+  bookDetailsDisplay = 'none';
+  bookDetailsDirection = '';
+  boxDisplay = 'none';
+  boxDirection = '';
+  masterSerialListDisplay = 'none';
+  masterSerialListDirection = '';
+  hazardousChemicalsDisplay = 'none';
+  hazardousChemicalsDirection = '';
+  systemCommentsDisplay = 'none';
+  systemCommentsDirection = '';
+  serializedInventoriesDisplay = 'none';
+  serializedInventoriesDirection = '';
+  carrierEdiDocumentDisplay = 'none';
+  carrierEdiDocumentDirection = '';
+  contentsDisplay = 'none';
+  contentsDirection = '';
   commodityDisplay = 'none';
   commodityDirection = '';
   filesDisplay = 'none';
   filesDirection = '';
   campusBuildingsDisplay = 'none';
   campusBuildingsDirection = '';
-  commentSubcodeDisplay='none';
-  commentSubcodeDirection='';
-  customerAddressesDisplay='none';
-  customerAddressesDirection='';
-  
+  commentSubcodeDisplay = 'none';
+  commentSubcodeDirection = '';
+  customerAddressesDisplay = 'none';
+  customerAddressesDirection = '';
 
-  
   showreceviceSubmenushowhide() {
     this.showreceviceSubmenu = !this.showreceviceSubmenu;
+    this.showcustomersSubmenu = false;
     this.showorderSubmenu = false;
     this.showtallysSubmenu = false;
     this.showshippingSubmenu = false;
     this.showstorerSubmenu = false;
     this.showBuildingSubmenu = false;
-    this.showMoveQueueSubmenu=false;
+    this.showMoveQueueSubmenu = false;
+    this.storerdisplay = 'none';
+    this.mapZonedirection = '';
+    this.mapZonedisplay = 'none';
+    this.storerdirection = '';
+    this.tallysdisplay = 'none';
+    this.tallysdirection = '';
+    (this.customersdisplay = 'none'),
+      (this.customersdirection = ''),
+      (this.carrierdisplay = 'none');
+    this.carrierdirection = '';
+    this.ordersdisplay = 'none';
+    this.ordersdirection = '';
+    this.shippingsdisplay = 'none';
+    this.shippingsdirection = '';
+    this.buildingdisplay = 'none';
+    this.buildingdirection = '';
+    (this.mapLocationDispaly = 'none'), (this.mapLocationDirection = '');
+    this.itemdisplay = 'none';
+    this.itemdirection = '';
+    this.consigneeDisplay = 'none';
+    this.consigneeDirection = '';
+    this.exitPointDisplay = 'none';
+    this.exitPointDirection = '';
+    this.moveQueueDisplay = 'none';
+    this.moveQueueDirection = '';
+
+    if (this.showreceviceSubmenu == true) {
+      this.receviedisplay = '';
+      this.receviedirection = '';
+    } else {
+      this.receviedisplay = 'none';
+      this.receviedirection = '';
+    }
+  }
+
+  showtallySubmenushowhide() {
+    this.showreceviceSubmenu = false;
+    this.showcustomersSubmenu = false;
+    this.showorderSubmenu = false;
+    this.showshippingSubmenu = false;
+    this.showstorerSubmenu = false;
+    this.showBuildingSubmenu = false;
+    this.showCarrierSubmenu = false;
+    this.showItemSubmenu = false;
+    this.showMoveQueueSubmenu = false;
+    this.itemdisplay = 'none';
+    this.itemdirection = '';
+    this.carrierdisplay = 'none';
+    this.carrierdirection = '';
+    this.storerdisplay = 'none';
+    this.storerdirection = '';
+    this.mapZonedirection = '';
+    this.mapZonedisplay = 'none';
+    this.receviedisplay = 'none';
+    this.receviedirection = '';
+    this.tallysdisplay = 'none';
+    this.tallysdirection = '';
+    this.carrierdisplay = 'none';
+    this.carrierdirection = '';
+    this.shippingsdisplay = 'none';
+    this.shippingsdirection = '';
+    this.buildingdisplay = 'none';
+    this.buildingdirection = '';
+    this.consigneeDisplay = 'none';
+    this.consigneeDirection = '';
+    this.exitPointDisplay = 'none';
+    this.exitPointDirection = '';
+    this.moveQueueDisplay = 'none';
+    this.moveQueueDirection = '';
+    (this.mapLocationDispaly = 'none'), (this.mapLocationDirection = '');
+    this.showtallysSubmenu = !this.showtallysSubmenu;
+    if (this.showtallysSubmenu == true) {
+      this.tallysdisplay = '';
+      this.tallysdirection = '';
+    } else {
+      this.tallysdisplay = 'none';
+      this.tallysdirection = '';
+    }
+  }
+
+  showcustomersSubmenushowhide() {
+    this.showcustomersSubmenu = !this.showcustomersSubmenu;
+    this.showreceviceSubmenu = false;
+    this.showorderSubmenu = false;
+    this.showtallysSubmenu = false;
+    this.showshippingSubmenu = false;
+    this.showstorerSubmenu = false;
+    this.showBuildingSubmenu = false;
+    this.showMoveQueueSubmenu = false;
     this.storerdisplay = 'none';
     this.mapZonedirection = '';
     this.mapZonedisplay = 'none';
@@ -209,76 +289,32 @@ export class MainNavComponent implements OnInit {
     this.shippingsdirection = '';
     this.buildingdisplay = 'none';
     this.buildingdirection = '';
-    this.mapLocationDispaly='none',
-    this.mapLocationDirection=''
-    this.itemdisplay='none';
-    this.itemdirection=''
-    this.consigneeDisplay='none';
-    this.consigneeDirection='';
-    this.exitPointDisplay='none';
-    this.exitPointDirection='';
-    this.moveQueueDisplay='none';
- this.moveQueueDirection='';
-
-    if (this.showreceviceSubmenu == true) {
-      this.receviedisplay = '';
-      this.receviedirection = '';
-    } else {
-      this.receviedisplay = 'none';
-      this.receviedirection = '';
-    }
-  }
-  
-  showtallySubmenushowhide() {
-    this.showreceviceSubmenu = false;
-    this.showorderSubmenu = false;
-    this.showshippingSubmenu = false;
-    this.showstorerSubmenu = false;
-    this.showBuildingSubmenu = false;
-    this.showCarrierSubmenu = false;
-    this.showItemSubmenu = false;
-    this.showMoveQueueSubmenu=false;
+    (this.mapLocationDispaly = 'none'), (this.mapLocationDirection = '');
     this.itemdisplay = 'none';
     this.itemdirection = '';
-    this.carrierdisplay = 'none';
-    this.carrierdirection = '';
-    this.storerdisplay = 'none';
-    this.storerdirection = '';
-    this.mapZonedirection = '';
-    this.mapZonedisplay = 'none';
-    this.receviedisplay = 'none';
-    this.receviedirection = '';
-    this.tallysdisplay = 'none';
-    this.tallysdirection = '';
-    this.shippingsdisplay = 'none';
-    this.shippingsdirection = '';
-    this.buildingdisplay = 'none';
-    this.buildingdirection = '';
-    this.consigneeDisplay='none';
-    this.consigneeDirection='';
-    this.exitPointDisplay='none';
-    this.exitPointDirection='';
-    this.moveQueueDisplay='none';
- this.moveQueueDirection='';
-    (this.mapLocationDispaly = 'none'), (this.mapLocationDirection = '');
-    this.showtallysSubmenu = !this.showtallysSubmenu;
-    if (this.showtallysSubmenu == true) {
-      this.tallysdisplay = '';
-      this.tallysdirection = '';
+    this.consigneeDisplay = 'none';
+    this.consigneeDirection = '';
+    this.exitPointDisplay = 'none';
+    this.exitPointDirection = '';
+    this.moveQueueDisplay = 'none';
+    this.moveQueueDirection = '';
+
+    if (this.showcustomersSubmenu == true) {
+      this.customersdisplay = '';
+      this.customersdirection = '';
     } else {
-      this.tallysdisplay = 'none';
-      this.tallysdirection = '';
+      this.customersdisplay = 'none';
+      this.customersdirection = '';
     }
   }
-  
-  
+
   showordersSubmenushowhide() {
     this.showreceviceSubmenu = false;
     this.showtallysSubmenu = false;
     this.showBuildingSubmenu = false;
     this.showCarrierSubmenu = false;
     this.showItemSubmenu = false;
-    this.showMoveQueueSubmenu=false;
+    this.showMoveQueueSubmenu = false;
     this.itemdisplay = 'none';
     this.itemdirection = '';
     this.mapZonedirection = '';
@@ -297,12 +333,12 @@ export class MainNavComponent implements OnInit {
     this.receviedirection = '';
     this.buildingdisplay = 'none';
     this.buildingdirection = '';
-    this.consigneeDisplay='none';
-    this.consigneeDirection='';
-    this.exitPointDisplay='none';
-    this.exitPointDirection='';
-    this.moveQueueDisplay='none';
- this.moveQueueDirection='';
+    this.consigneeDisplay = 'none';
+    this.consigneeDirection = '';
+    this.exitPointDisplay = 'none';
+    this.exitPointDirection = '';
+    this.moveQueueDisplay = 'none';
+    this.moveQueueDirection = '';
     (this.mapLocationDispaly = 'none'), (this.mapLocationDirection = '');
     this.showorderSubmenu = !this.showorderSubmenu;
     if (this.showorderSubmenu == true) {
@@ -322,7 +358,7 @@ export class MainNavComponent implements OnInit {
     this.showstorerSubmenu = false;
     this.showCarrierSubmenu = false;
     this.showItemSubmenu = false;
-    this.showMoveQueueSubmenu=false;
+    this.showMoveQueueSubmenu = false;
     this.itemdisplay = 'none';
     this.itemdirection = '';
     this.carrierdisplay = 'none';
@@ -339,12 +375,12 @@ export class MainNavComponent implements OnInit {
     this.ordersdirection = '';
     this.buildingdisplay = 'none';
     this.buildingdirection = '';
-    this.consigneeDisplay='none';
-    this.consigneeDirection='';
-    this.exitPointDisplay='none';
-    this.exitPointDirection='';
-    this.moveQueueDisplay='none';
- this.moveQueueDirection='';
+    this.consigneeDisplay = 'none';
+    this.consigneeDirection = '';
+    this.exitPointDisplay = 'none';
+    this.exitPointDirection = '';
+    this.moveQueueDisplay = 'none';
+    this.moveQueueDirection = '';
     (this.mapLocationDispaly = 'none'), (this.mapLocationDirection = '');
     this.showshippingSubmenu = !this.showshippingSubmenu;
     if (this.showshippingSubmenu == true) {
@@ -364,7 +400,7 @@ export class MainNavComponent implements OnInit {
     this.showBuildingSubmenu = false;
     this.showCarrierSubmenu = false;
     this.showItemSubmenu = false;
-    this.showMoveQueueSubmenu =false;
+    this.showMoveQueueSubmenu = false;
     this.itemdisplay = 'none';
     this.itemdirection = '';
     this.mapZonedirection = '';
@@ -381,12 +417,12 @@ export class MainNavComponent implements OnInit {
     this.receviedirection = '';
     this.buildingdisplay = 'none';
     this.buildingdirection = '';
-    this.consigneeDisplay='none';
-    this.consigneeDirection='';
-    this.exitPointDisplay='none';
-    this.exitPointDirection='';
-    this.moveQueueDisplay='none';
- this.moveQueueDirection='';
+    this.consigneeDisplay = 'none';
+    this.consigneeDirection = '';
+    this.exitPointDisplay = 'none';
+    this.exitPointDirection = '';
+    this.moveQueueDisplay = 'none';
+    this.moveQueueDirection = '';
     (this.mapLocationDispaly = 'none'), (this.mapLocationDirection = '');
     this.showstorerSubmenu = !this.showstorerSubmenu;
     if (this.showstorerSubmenu == true) {
@@ -400,13 +436,14 @@ export class MainNavComponent implements OnInit {
 
   showBuildingSubmenushowhide() {
     this.showreceviceSubmenu = false;
+    this.showcustomersSubmenu = false;
     this.showtallysSubmenu = false;
     this.showshippingSubmenu = false;
     this.showorderSubmenu = false;
     this.showCarrierSubmenu = false;
     this.showMapZoneSubmenu = false;
     this.showItemSubmenu = false;
-    this.showMoveQueueSubmenu=false;
+    this.showMoveQueueSubmenu = false;
     this.itemdisplay = 'none';
     this.itemdirection = '';
     this.mapZonedirection = '';
@@ -415,6 +452,8 @@ export class MainNavComponent implements OnInit {
     this.ordersdirection = '';
     this.tallysdisplay = 'none';
     this.tallysdirection = '';
+    this.customersdisplay = 'none';
+    this.customersdirection = '';
     this.carrierdisplay = 'none';
     this.carrierdirection = '';
     this.shippingsdisplay = 'none';
@@ -423,12 +462,12 @@ export class MainNavComponent implements OnInit {
     this.receviedirection = '';
     this.buildingdisplay = 'none';
     this.buildingdirection = '';
-    this.consigneeDisplay='none';
-    this.consigneeDirection='';
-    this.exitPointDisplay='none';
-    this.exitPointDirection='';
-    this.moveQueueDisplay='none';
- this.moveQueueDirection='';
+    this.consigneeDisplay = 'none';
+    this.consigneeDirection = '';
+    this.exitPointDisplay = 'none';
+    this.exitPointDirection = '';
+    this.moveQueueDisplay = 'none';
+    this.moveQueueDirection = '';
     (this.mapLocationDispaly = 'none'), (this.mapLocationDirection = '');
 
     this.showBuildingSubmenu = !this.showBuildingSubmenu;
@@ -449,7 +488,7 @@ export class MainNavComponent implements OnInit {
     this.showCarrierSubmenu = false;
     this.showtallysSubmenu = false;
     this.showItemSubmenu = false;
-    this.showMoveQueueSubmenu=false;
+    this.showMoveQueueSubmenu = false;
     this.itemdisplay = 'none';
     this.itemdirection = '';
     this.carrierdisplay = 'none';
@@ -464,12 +503,12 @@ export class MainNavComponent implements OnInit {
     this.shippingsdirection = '';
     this.mapZonedirection = '';
     this.mapZonedisplay = 'none';
-    this.consigneeDisplay='none';
-    this.consigneeDirection='';
-    this.exitPointDisplay='none';
-    this.exitPointDirection='';
-    this.moveQueueDisplay='none';
- this.moveQueueDirection='';
+    this.consigneeDisplay = 'none';
+    this.consigneeDirection = '';
+    this.exitPointDisplay = 'none';
+    this.exitPointDirection = '';
+    this.moveQueueDisplay = 'none';
+    this.moveQueueDirection = '';
     (this.mapLocationDispaly = 'none'), (this.mapLocationDirection = '');
     this.showMapZoneSubmenu = !this.showMapZoneSubmenu;
     if (this.showMapZoneSubmenu == true) {
@@ -488,7 +527,7 @@ export class MainNavComponent implements OnInit {
     this.showBuildingSubmenu = false;
     this.showCarrierSubmenu = false;
     this.showItemSubmenu = false;
-    this.showMoveQueueSubmenu=false;
+    this.showMoveQueueSubmenu = false;
     this.itemdisplay = 'none';
     this.itemdirection = '';
     this.carrierdisplay = 'none';
@@ -503,13 +542,13 @@ export class MainNavComponent implements OnInit {
     this.shippingsdirection = '';
     this.mapZonedirection = '';
     this.mapZonedisplay = 'none';
-    this.consigneeDisplay='none';
-    this.consigneeDirection='';
-    this.exitPointDisplay='none';
-    this.exitPointDirection='';
-    this.moveQueueDisplay='none';
- this.moveQueueDirection='';
-    
+    this.consigneeDisplay = 'none';
+    this.consigneeDirection = '';
+    this.exitPointDisplay = 'none';
+    this.exitPointDirection = '';
+    this.moveQueueDisplay = 'none';
+    this.moveQueueDirection = '';
+
     this.showMapLocationSubMenu = !this.showMapLocationSubMenu;
     if (this.showMapLocationSubMenu == true) {
       this.mapLocationDispaly = '';
@@ -528,7 +567,7 @@ export class MainNavComponent implements OnInit {
     this.showtallysSubmenu = false;
     this.showMapZoneSubmenu = false;
     this.showItemSubmenu = false;
-    this.showMoveQueueSubmenu=false;
+    this.showMoveQueueSubmenu = false;
     this.itemdisplay = 'none';
     this.itemdirection = '';
     this.carrierdisplay = 'none';
@@ -545,8 +584,8 @@ export class MainNavComponent implements OnInit {
     this.mapZonedisplay = 'none';
     this.mapLocationDispaly = 'none';
     this.mapLocationDirection = '';
-    this.moveQueueDisplay='none';
-  this.moveQueueDirection='';
+    this.moveQueueDisplay = 'none';
+    this.moveQueueDirection = '';
     this.showCarrierSubmenu = !this.showCarrierSubmenu;
     if (this.showCarrierSubmenu == true) {
       this.carrierdisplay = '';
@@ -558,15 +597,15 @@ export class MainNavComponent implements OnInit {
   }
 
   showConsigneeSubmenuShowhide() {
-    this.showConsigneeSubmenu =!this.showConsigneeSubmenu;
+    this.showConsigneeSubmenu = !this.showConsigneeSubmenu;
     this.showreceviceSubmenu = false;
     this.showorderSubmenu = false;
     this.showtallysSubmenu = false;
     this.showshippingSubmenu = false;
     this.showstorerSubmenu = false;
     this.showBuildingSubmenu = false;
-    this.showMoveQueueSubmenu=false;
-   
+    this.showMoveQueueSubmenu = false;
+
     this.storerdisplay = 'none';
     this.mapZonedirection = '';
     this.mapZonedisplay = 'none';
@@ -579,16 +618,15 @@ export class MainNavComponent implements OnInit {
     this.shippingsdirection = '';
     this.buildingdisplay = 'none';
     this.buildingdirection = '';
-    this.mapLocationDispaly='none',
-    this.mapLocationDirection=''
-    this.itemdisplay='none';
-    this.itemdirection=''
-    this.consigneeDisplay='none';
-    this.consigneeDirection='';
-    this.exitPointDisplay='none';
-    this.exitPointDirection='';
-    this.moveQueueDisplay='none';
- this.moveQueueDirection='';
+    (this.mapLocationDispaly = 'none'), (this.mapLocationDirection = '');
+    this.itemdisplay = 'none';
+    this.itemdirection = '';
+    this.consigneeDisplay = 'none';
+    this.consigneeDirection = '';
+    this.exitPointDisplay = 'none';
+    this.exitPointDirection = '';
+    this.moveQueueDisplay = 'none';
+    this.moveQueueDirection = '';
 
     if (this.showConsigneeSubmenu == true) {
       this.consigneeDisplay = '';
@@ -607,9 +645,9 @@ export class MainNavComponent implements OnInit {
     this.showshippingSubmenu = false;
     this.showstorerSubmenu = false;
     this.showBuildingSubmenu = false;
-    this.showExitPointSubmenu=!this.showExitPointSubmenu;
-    this.showMoveQueueSubmenu=false;
-   
+    this.showExitPointSubmenu = !this.showExitPointSubmenu;
+    this.showMoveQueueSubmenu = false;
+
     this.storerdisplay = 'none';
     this.mapZonedirection = '';
     this.mapZonedisplay = 'none';
@@ -622,16 +660,15 @@ export class MainNavComponent implements OnInit {
     this.shippingsdirection = '';
     this.buildingdisplay = 'none';
     this.buildingdirection = '';
-    this.mapLocationDispaly='none',
-    this.mapLocationDirection=''
-    this.itemdisplay='none';
-    this.itemdirection=''
-    this.consigneeDisplay='none';
-    this.consigneeDirection='';
-    this.exitPointDisplay='none';
-    this.exitPointDirection='';
-    this.moveQueueDisplay='none';
- this.moveQueueDirection='';
+    (this.mapLocationDispaly = 'none'), (this.mapLocationDirection = '');
+    this.itemdisplay = 'none';
+    this.itemdirection = '';
+    this.consigneeDisplay = 'none';
+    this.consigneeDirection = '';
+    this.exitPointDisplay = 'none';
+    this.exitPointDirection = '';
+    this.moveQueueDisplay = 'none';
+    this.moveQueueDirection = '';
 
     if (this.showExitPointSubmenu == true) {
       this.exitPointDisplay = '';
@@ -667,10 +704,10 @@ export class MainNavComponent implements OnInit {
     this.mapZonedisplay = 'none';
     this.mapLocationDispaly = 'none';
     this.mapLocationDirection = '';
-    this.exitPointDisplay='none';
-    this.exitPointDirection='';
-    this.moveQueueDisplay='none';
- this.moveQueueDirection='';
+    this.exitPointDisplay = 'none';
+    this.exitPointDirection = '';
+    this.moveQueueDisplay = 'none';
+    this.moveQueueDirection = '';
     this.showItemSubmenu = !this.showItemSubmenu;
     if (this.showItemSubmenu == true) {
       this.itemdisplay = '';
@@ -690,7 +727,6 @@ export class MainNavComponent implements OnInit {
     this.showMapZoneSubmenu = false;
     this.showCarrierSubmenu = false;
 
-   
     this.itemdisplay = 'none';
     this.itemdirection = '';
     this.carrierdisplay = 'none';
@@ -707,10 +743,10 @@ export class MainNavComponent implements OnInit {
     this.mapZonedisplay = 'none';
     this.mapLocationDispaly = 'none';
     this.mapLocationDirection = '';
-    this.exitPointDisplay='none';
-    this.exitPointDirection='';
-    this.moveQueueDisplay='none';
- this.moveQueueDirection='';
+    this.exitPointDisplay = 'none';
+    this.exitPointDirection = '';
+    this.moveQueueDisplay = 'none';
+    this.moveQueueDirection = '';
     this.showMoveQueueSubmenu = !this.showMoveQueueSubmenu;
     if (this.showMoveQueueSubmenu == true) {
       this.moveQueueDisplay = '';
@@ -720,7 +756,6 @@ export class MainNavComponent implements OnInit {
       this.moveQueueDirection = '';
     }
   }
-
 
   showPostalAbbreviationSubmenu() {
     this.showreceviceSubmenu = false;
@@ -732,7 +767,6 @@ export class MainNavComponent implements OnInit {
     this.showCarrierSubmenu = false;
     this.showMoveQueueSubmenu = false;
 
-   
     this.itemdisplay = 'none';
     this.itemdirection = '';
     this.carrierdisplay = 'none';
@@ -749,10 +783,10 @@ export class MainNavComponent implements OnInit {
     this.mapZonedisplay = 'none';
     this.mapLocationDispaly = 'none';
     this.mapLocationDirection = '';
-    this.exitPointDisplay='none';
-    this.exitPointDirection='';
-    this.moveQueueDisplay='none';
- this.moveQueueDirection='';
+    this.exitPointDisplay = 'none';
+    this.exitPointDirection = '';
+    this.moveQueueDisplay = 'none';
+    this.moveQueueDirection = '';
     this.showPostalAbbreviations = !this.showPostalAbbreviations;
     if (this.showPostalAbbreviations == true) {
       this.postalAbbreviationsDisplay = '';
@@ -773,8 +807,8 @@ export class MainNavComponent implements OnInit {
     this.showCarrierSubmenu = false;
     this.showMoveQueueSubmenu = false;
     this.showPostalAbbreviations = false;
-    this.showReceivables=!this.showReceivables;
-   
+    this.showReceivables = !this.showReceivables;
+
     this.itemdisplay = 'none';
     this.itemdirection = '';
     this.carrierdisplay = 'none';
@@ -791,11 +825,11 @@ export class MainNavComponent implements OnInit {
     this.mapZonedisplay = 'none';
     this.mapLocationDispaly = 'none';
     this.mapLocationDirection = '';
-    this.exitPointDisplay='none';
-    this.exitPointDirection='';
-    this.moveQueueDisplay='none';
- this.moveQueueDirection='';
-    
+    this.exitPointDisplay = 'none';
+    this.exitPointDirection = '';
+    this.moveQueueDisplay = 'none';
+    this.moveQueueDirection = '';
+
     if (this.showReceivables == true) {
       this.receivablesDisplay = '';
       this.receivablesDirection = '';
@@ -815,9 +849,9 @@ export class MainNavComponent implements OnInit {
     this.showCarrierSubmenu = false;
     this.showMoveQueueSubmenu = false;
     this.showPostalAbbreviations = false;
-    this.showReceivables=false;
-    this.showWorkWithActionsRsms=!this.showWorkWithActionsRsms;
-   
+    this.showReceivables = false;
+    this.showWorkWithActionsRsms = !this.showWorkWithActionsRsms;
+
     this.itemdisplay = 'none';
     this.itemdirection = '';
     this.carrierdisplay = 'none';
@@ -834,11 +868,11 @@ export class MainNavComponent implements OnInit {
     this.mapZonedisplay = 'none';
     this.mapLocationDispaly = 'none';
     this.mapLocationDirection = '';
-    this.exitPointDisplay='none';
-    this.exitPointDirection='';
-    this.moveQueueDisplay='none';
- this.moveQueueDirection='';
-    
+    this.exitPointDisplay = 'none';
+    this.exitPointDirection = '';
+    this.moveQueueDisplay = 'none';
+    this.moveQueueDirection = '';
+
     if (this.showWorkWithActionsRsms == true) {
       this.actionRsmsDisplay = '';
       this.actionRsmsDirection = '';
@@ -847,7 +881,6 @@ export class MainNavComponent implements OnInit {
       this.actionRsmsDirection = '';
     }
   }
-
 
   showApplicationSubMenu() {
     this.showreceviceSubmenu = false;
@@ -859,10 +892,10 @@ export class MainNavComponent implements OnInit {
     this.showCarrierSubmenu = false;
     this.showMoveQueueSubmenu = false;
     this.showPostalAbbreviations = false;
-    this.showReceivables=false;
-    this.showWorkWithActionsRsms=false;
-    this.showWorkWithApplication=!this.showWorkWithApplication;
-   
+    this.showReceivables = false;
+    this.showWorkWithActionsRsms = false;
+    this.showWorkWithApplication = !this.showWorkWithApplication;
+
     this.itemdisplay = 'none';
     this.itemdirection = '';
     this.carrierdisplay = 'none';
@@ -879,11 +912,11 @@ export class MainNavComponent implements OnInit {
     this.mapZonedisplay = 'none';
     this.mapLocationDispaly = 'none';
     this.mapLocationDirection = '';
-    this.exitPointDisplay='none';
-    this.exitPointDirection='';
-    this.moveQueueDisplay='none';
- this.moveQueueDirection='';
-    
+    this.exitPointDisplay = 'none';
+    this.exitPointDirection = '';
+    this.moveQueueDisplay = 'none';
+    this.moveQueueDirection = '';
+
     if (this.showWorkWithApplication == true) {
       this.applicationDisplay = '';
       this.applicationDirection = '';
@@ -903,11 +936,11 @@ export class MainNavComponent implements OnInit {
     this.showCarrierSubmenu = false;
     this.showMoveQueueSubmenu = false;
     this.showPostalAbbreviations = false;
-    this.showReceivables=false;
-    this.showWorkWithActionsRsms=false;
-    this.showWorkWithApplication=false;
-    this.showControllBatchFile=!this.showControllBatchFile;
-   
+    this.showReceivables = false;
+    this.showWorkWithActionsRsms = false;
+    this.showWorkWithApplication = false;
+    this.showControllBatchFile = !this.showControllBatchFile;
+
     this.itemdisplay = 'none';
     this.itemdirection = '';
     this.carrierdisplay = 'none';
@@ -924,11 +957,11 @@ export class MainNavComponent implements OnInit {
     this.mapZonedisplay = 'none';
     this.mapLocationDispaly = 'none';
     this.mapLocationDirection = '';
-    this.exitPointDisplay='none';
-    this.exitPointDirection='';
-    this.moveQueueDisplay='none';
-    this.moveQueueDirection='';
-    
+    this.exitPointDisplay = 'none';
+    this.exitPointDirection = '';
+    this.moveQueueDisplay = 'none';
+    this.moveQueueDirection = '';
+
     if (this.showControllBatchFile == true) {
       this.controllBatchFileDirection = '';
       this.controllBatchFileDisplay = '';
@@ -948,12 +981,12 @@ export class MainNavComponent implements OnInit {
     this.showCarrierSubmenu = false;
     this.showMoveQueueSubmenu = false;
     this.showPostalAbbreviations = false;
-    this.showReceivables=false;
-    this.showWorkWithActionsRsms=false;
-    this.showWorkWithApplication=false;
-    this.showControllBatchFile=false;
-    this.showAuditHeaders=!this.showAuditHeaders;
-   
+    this.showReceivables = false;
+    this.showWorkWithActionsRsms = false;
+    this.showWorkWithApplication = false;
+    this.showControllBatchFile = false;
+    this.showAuditHeaders = !this.showAuditHeaders;
+
     this.itemdisplay = 'none';
     this.itemdirection = '';
     this.carrierdisplay = 'none';
@@ -970,11 +1003,11 @@ export class MainNavComponent implements OnInit {
     this.mapZonedisplay = 'none';
     this.mapLocationDispaly = 'none';
     this.mapLocationDirection = '';
-    this.exitPointDisplay='none';
-    this.exitPointDirection='';
-    this.moveQueueDisplay='none';
- this.moveQueueDirection='';
-    
+    this.exitPointDisplay = 'none';
+    this.exitPointDirection = '';
+    this.moveQueueDisplay = 'none';
+    this.moveQueueDirection = '';
+
     if (this.showAuditHeaders == true) {
       this.auditHeaderDisplay = '';
       this.auditHeaderDirection = '';
@@ -983,7 +1016,6 @@ export class MainNavComponent implements OnInit {
       this.auditHeaderDirection = '';
     }
   }
-
 
   showBoxContentSubMenu() {
     this.showreceviceSubmenu = false;
@@ -995,13 +1027,13 @@ export class MainNavComponent implements OnInit {
     this.showCarrierSubmenu = false;
     this.showMoveQueueSubmenu = false;
     this.showPostalAbbreviations = false;
-    this.showReceivables=false;
-    this.showWorkWithActionsRsms=false;
-    this.showWorkWithApplication=false;
-    this.showControllBatchFile=false;
-    this.showAuditHeaders=false;
-    this.showBoxContent=!this.showBoxContent;
-   
+    this.showReceivables = false;
+    this.showWorkWithActionsRsms = false;
+    this.showWorkWithApplication = false;
+    this.showControllBatchFile = false;
+    this.showAuditHeaders = false;
+    this.showBoxContent = !this.showBoxContent;
+
     this.itemdisplay = 'none';
     this.itemdirection = '';
     this.carrierdisplay = 'none';
@@ -1018,11 +1050,11 @@ export class MainNavComponent implements OnInit {
     this.mapZonedisplay = 'none';
     this.mapLocationDispaly = 'none';
     this.mapLocationDirection = '';
-    this.exitPointDisplay='none';
-    this.exitPointDirection='';
-    this.moveQueueDisplay='none';
- this.moveQueueDirection='';
-    
+    this.exitPointDisplay = 'none';
+    this.exitPointDirection = '';
+    this.moveQueueDisplay = 'none';
+    this.moveQueueDirection = '';
+
     if (this.showBoxContent == true) {
       this.boxContentDisplay = '';
       this.boxContentDirection = '';
@@ -1031,7 +1063,6 @@ export class MainNavComponent implements OnInit {
       this.boxContentDirection = '';
     }
   }
-
 
   showAccountProcessingSubmenu() {
     this.showreceviceSubmenu = false;
@@ -1151,7 +1182,7 @@ export class MainNavComponent implements OnInit {
     this.showAuditHeaders = false;
     this.showReceivables = false;
     this.showActivityDescription = false;
-    this.showBalanceErrors=!this.showBalanceErrors
+    this.showBalanceErrors = !this.showBalanceErrors;
     this.receivablesDisplay = 'none';
     this.receivablesDirection = '';
     this.showAccountProcessing = false;
@@ -1177,7 +1208,6 @@ export class MainNavComponent implements OnInit {
     this.exitPointDirection = '';
     this.moveQueueDisplay = 'none';
     this.moveQueueDirection = '';
-    
 
     if (this.showBalanceErrors == true) {
       this.balanceErrorDisplay = '';
@@ -1204,15 +1234,14 @@ export class MainNavComponent implements OnInit {
     this.showAuditHeaders = false;
     this.showReceivables = false;
     this.showActivityDescription = false;
-    this.showBalanceErrors=false;
-    this.showInventoryBooks= !this.showInventoryBooks;
+    this.showBalanceErrors = false;
+    this.showInventoryBooks = !this.showInventoryBooks;
     this.receivablesDisplay = 'none';
     this.receivablesDirection = '';
     this.showAccountProcessing = false;
     this.AccountProcessingDisplay = 'none';
     this.ActivityDescriptionDirection = '';
-    
-   
+
     this.itemdisplay = 'none';
     this.itemdirection = '';
     this.carrierdisplay = 'none';
@@ -1233,7 +1262,6 @@ export class MainNavComponent implements OnInit {
     this.exitPointDirection = '';
     this.moveQueueDisplay = 'none';
     this.moveQueueDirection = '';
-    
 
     if (this.showInventoryBooks == true) {
       this.inventoryBooksDisplay = '';
@@ -1260,16 +1288,15 @@ export class MainNavComponent implements OnInit {
     this.showAuditHeaders = false;
     this.showReceivables = false;
     this.showActivityDescription = false;
-    this.showBalanceErrors=false;
-    this.showInventoryBooks= false;
-    this.showAddressTypes= !this.showAddressTypes;
+    this.showBalanceErrors = false;
+    this.showInventoryBooks = false;
+    this.showAddressTypes = !this.showAddressTypes;
     this.receivablesDisplay = 'none';
     this.receivablesDirection = '';
     this.showAccountProcessing = false;
     this.AccountProcessingDisplay = 'none';
     this.ActivityDescriptionDirection = '';
-    
-   
+
     this.itemdisplay = 'none';
     this.itemdirection = '';
     this.carrierdisplay = 'none';
@@ -1290,7 +1317,6 @@ export class MainNavComponent implements OnInit {
     this.exitPointDirection = '';
     this.moveQueueDisplay = 'none';
     this.moveQueueDirection = '';
-    
 
     if (this.showAddressTypes == true) {
       this.addressTypeDisplay = '';
@@ -1470,8 +1496,6 @@ export class MainNavComponent implements OnInit {
   //   }
   // }
 
-
-
   showDockScheduleSubMenu() {
     this.showreceviceSubmenu = false;
     this.showorderSubmenu = false;
@@ -1489,8 +1513,8 @@ export class MainNavComponent implements OnInit {
     this.showReceivables = false;
     this.showActivityDescription = false;
     this.showInventoryTagSubmenu = false;
-    this.showOrderStagingBatches=false;
-    this.showDockSchedules=!this.showDockSchedules;
+    this.showOrderStagingBatches = false;
+    this.showDockSchedules = !this.showDockSchedules;
     this.ActivityDescriptionDirection = '';
     this.ActivityDescriptionDisplay = 'none';
 
@@ -1499,7 +1523,6 @@ export class MainNavComponent implements OnInit {
     this.showAccountProcessing = false;
     this.AccountProcessingDisplay = 'none';
     this.ActivityDescriptionDirection = '';
-
 
     this.itemdisplay = 'none';
     this.itemdirection = '';
@@ -1521,9 +1544,8 @@ export class MainNavComponent implements OnInit {
     this.exitPointDirection = '';
     this.moveQueueDisplay = 'none';
     this.moveQueueDirection = '';
-    this.inventoryBooksDisplay='none'
-    this.inventoryBooksDirection=''
-   
+    this.inventoryBooksDisplay = 'none';
+    this.inventoryBooksDirection = '';
 
     if (this.showDockSchedules == true) {
       this.dockScheduleDisplay = '';
@@ -1533,7 +1555,6 @@ export class MainNavComponent implements OnInit {
       this.dockScheduleDirection = '';
     }
   }
-
 
   showLtlBatchesSubmenu() {
     this.showreceviceSubmenu = false;
@@ -1552,13 +1573,13 @@ export class MainNavComponent implements OnInit {
     this.showReceivables = false;
     this.showActivityDescription = false;
     this.showInventoryTagSubmenu = false;
-    this.showOrderStagingBatches=false;
-    this.showDockSchedules=false;
-    this.showLtlBatches= !this.showLtlBatches;
+    this.showOrderStagingBatches = false;
+    this.showDockSchedules = false;
+    this.showLtlBatches = !this.showLtlBatches;
     this.ActivityDescriptionDirection = '';
     this.ActivityDescriptionDisplay = 'none';
-    this.inventoryBooksDisplay='none'
-    this.inventoryBooksDirection=''
+    this.inventoryBooksDisplay = 'none';
+    this.inventoryBooksDirection = '';
 
     this.receivablesDisplay = 'none';
     this.receivablesDirection = '';
@@ -1585,7 +1606,6 @@ export class MainNavComponent implements OnInit {
     this.exitPointDirection = '';
     this.moveQueueDisplay = 'none';
     this.moveQueueDirection = '';
-   
 
     if (this.showLtlBatches == true) {
       this.ltlBatchesDisplay = '';
@@ -1613,14 +1633,14 @@ export class MainNavComponent implements OnInit {
     this.showReceivables = false;
     this.showActivityDescription = false;
     this.showInventoryTagSubmenu = false;
-    this.showOrderStagingBatches=false;
-    this.showDockSchedules=false;
-    this.showLtlBatches= false;
-   
-    this.showBookDetails=!this.showBookDetails;
+    this.showOrderStagingBatches = false;
+    this.showDockSchedules = false;
+    this.showLtlBatches = false;
+
+    this.showBookDetails = !this.showBookDetails;
     this.ActivityDescriptionDirection = '';
-    this.inventoryBooksDisplay='none'
-    this.inventoryBooksDirection=''
+    this.inventoryBooksDisplay = 'none';
+    this.inventoryBooksDirection = '';
 
     this.ActivityDescriptionDisplay = 'none';
 
@@ -1649,7 +1669,6 @@ export class MainNavComponent implements OnInit {
     this.exitPointDirection = '';
     this.moveQueueDisplay = 'none';
     this.moveQueueDirection = '';
-   
 
     if (this.showBookDetails == true) {
       this.bookDetailsDisplay = '';
@@ -1676,10 +1695,10 @@ export class MainNavComponent implements OnInit {
     this.showAuditHeaders = false;
     this.showReceivables = false;
     this.showActivityDescription = false;
-    this.showBalanceErrors=false;
-    this.showInventoryTagSubmenu=false;
-    this.showOrderStagingBatches=false;
-    this.showLtlBatches=false;
+    this.showBalanceErrors = false;
+    this.showInventoryTagSubmenu = false;
+    this.showOrderStagingBatches = false;
+    this.showLtlBatches = false;
     this.showWorkWithBoxes = !this.showWorkWithBoxes;
     this.receivablesDisplay = 'none';
     this.receivablesDirection = '';
@@ -1706,8 +1725,7 @@ export class MainNavComponent implements OnInit {
     this.exitPointDirection = '';
     this.moveQueueDisplay = 'none';
     this.moveQueueDirection = '';
-    this.showDockSchedules=false;
-    
+    this.showDockSchedules = false;
 
     if (this.showWorkWithBoxes == true) {
       this.boxDisplay = '';
@@ -1734,12 +1752,12 @@ export class MainNavComponent implements OnInit {
     this.showAuditHeaders = false;
     this.showReceivables = false;
     this.showActivityDescription = false;
-    this.showBalanceErrors=false;
-    this.showInventoryTagSubmenu=false;
-    this.showOrderStagingBatches=false;
-    this.showLtlBatches=false;
+    this.showBalanceErrors = false;
+    this.showInventoryTagSubmenu = false;
+    this.showOrderStagingBatches = false;
+    this.showLtlBatches = false;
     this.showWorkWithBoxes = false;
-    this.showMasterSerialList=!this.showMasterSerialList;
+    this.showMasterSerialList = !this.showMasterSerialList;
     this.receivablesDisplay = 'none';
     this.receivablesDirection = '';
     this.showAccountProcessing = false;
@@ -1765,8 +1783,7 @@ export class MainNavComponent implements OnInit {
     this.exitPointDirection = '';
     this.moveQueueDisplay = 'none';
     this.moveQueueDirection = '';
-    this.showDockSchedules=false;
-    
+    this.showDockSchedules = false;
 
     if (this.showMasterSerialList == true) {
       this.masterSerialListDisplay = '';
@@ -1793,13 +1810,13 @@ export class MainNavComponent implements OnInit {
     this.showAuditHeaders = false;
     this.showReceivables = false;
     this.showActivityDescription = false;
-    this.showBalanceErrors=false;
-    this.showInventoryTagSubmenu=false;
-    this.showOrderStagingBatches=false;
-    this.showLtlBatches=false;
+    this.showBalanceErrors = false;
+    this.showInventoryTagSubmenu = false;
+    this.showOrderStagingBatches = false;
+    this.showLtlBatches = false;
     this.showWorkWithBoxes = false;
-    this.showMasterSerialList=false;
-    this.showHazardousChemicals=!this.showHazardousChemicals;
+    this.showMasterSerialList = false;
+    this.showHazardousChemicals = !this.showHazardousChemicals;
     this.receivablesDisplay = 'none';
     this.receivablesDirection = '';
     this.showAccountProcessing = false;
@@ -1825,8 +1842,7 @@ export class MainNavComponent implements OnInit {
     this.exitPointDirection = '';
     this.moveQueueDisplay = 'none';
     this.moveQueueDirection = '';
-    this.showDockSchedules=false;
-    
+    this.showDockSchedules = false;
 
     if (this.showHazardousChemicals == true) {
       this.hazardousChemicalsDisplay = '';
@@ -1853,13 +1869,13 @@ export class MainNavComponent implements OnInit {
     this.showAuditHeaders = false;
     this.showReceivables = false;
     this.showActivityDescription = false;
-    this.showBalanceErrors=false;
-    this.showInventoryTagSubmenu=false;
-    this.showOrderStagingBatches=false;
-    this.showLtlBatches=false;
+    this.showBalanceErrors = false;
+    this.showInventoryTagSubmenu = false;
+    this.showOrderStagingBatches = false;
+    this.showLtlBatches = false;
     this.showWorkWithBoxes = false;
-    this.showMasterSerialList=false;
-    this.showHazardousChemicals=false;
+    this.showMasterSerialList = false;
+    this.showHazardousChemicals = false;
     this.showSystemComments = !this.showSystemComments;
     this.receivablesDisplay = 'none';
     this.receivablesDirection = '';
@@ -1886,8 +1902,7 @@ export class MainNavComponent implements OnInit {
     this.exitPointDirection = '';
     this.moveQueueDisplay = 'none';
     this.moveQueueDirection = '';
-    this.showDockSchedules=false;
-    
+    this.showDockSchedules = false;
 
     if (this.showSystemComments == true) {
       this.systemCommentsDisplay = '';
@@ -1914,15 +1929,15 @@ export class MainNavComponent implements OnInit {
     this.showAuditHeaders = false;
     this.showReceivables = false;
     this.showActivityDescription = false;
-    this.showBalanceErrors=false;
-    this.showInventoryTagSubmenu=false;
-    this.showOrderStagingBatches=false;
-    this.showLtlBatches=false;
+    this.showBalanceErrors = false;
+    this.showInventoryTagSubmenu = false;
+    this.showOrderStagingBatches = false;
+    this.showLtlBatches = false;
     this.showWorkWithBoxes = false;
-    this.showMasterSerialList=false;
-    this.showHazardousChemicals=false;
+    this.showMasterSerialList = false;
+    this.showHazardousChemicals = false;
     this.showSystemComments = false;
-    this.showSerializedInventories=!this.showSerializedInventories;
+    this.showSerializedInventories = !this.showSerializedInventories;
     this.receivablesDisplay = 'none';
     this.receivablesDirection = '';
     this.showAccountProcessing = false;
@@ -1948,8 +1963,7 @@ export class MainNavComponent implements OnInit {
     this.exitPointDirection = '';
     this.moveQueueDisplay = 'none';
     this.moveQueueDirection = '';
-    this.showDockSchedules=false;
-    
+    this.showDockSchedules = false;
 
     if (this.showSerializedInventories == true) {
       this.serializedInventoriesDisplay = '';
@@ -1976,16 +1990,16 @@ export class MainNavComponent implements OnInit {
     this.showAuditHeaders = false;
     this.showReceivables = false;
     this.showActivityDescription = false;
-    this.showBalanceErrors=false;
-    this.showInventoryTagSubmenu=false;
-    this.showOrderStagingBatches=false;
-    this.showLtlBatches=false;
+    this.showBalanceErrors = false;
+    this.showInventoryTagSubmenu = false;
+    this.showOrderStagingBatches = false;
+    this.showLtlBatches = false;
     this.showWorkWithBoxes = false;
-    this.showMasterSerialList=false;
-    this.showHazardousChemicals=false;
+    this.showMasterSerialList = false;
+    this.showHazardousChemicals = false;
     this.showSystemComments = false;
-    this.showSerializedInventories=false;
-    this.showCarrierEdiDocuments=!this.showCarrierEdiDocuments;
+    this.showSerializedInventories = false;
+    this.showCarrierEdiDocuments = !this.showCarrierEdiDocuments;
     this.receivablesDisplay = 'none';
     this.receivablesDirection = '';
     this.showAccountProcessing = false;
@@ -2011,8 +2025,7 @@ export class MainNavComponent implements OnInit {
     this.exitPointDirection = '';
     this.moveQueueDisplay = 'none';
     this.moveQueueDirection = '';
-    this.showDockSchedules=false;
-    
+    this.showDockSchedules = false;
 
     if (this.showCarrierEdiDocuments == true) {
       this.carrierEdiDocumentDisplay = '';
@@ -2039,17 +2052,17 @@ export class MainNavComponent implements OnInit {
     this.showAuditHeaders = false;
     this.showReceivables = false;
     this.showActivityDescription = false;
-    this.showBalanceErrors=false;
-    this.showInventoryTagSubmenu=false;
-    this.showOrderStagingBatches=false;
-    this.showLtlBatches=false;
+    this.showBalanceErrors = false;
+    this.showInventoryTagSubmenu = false;
+    this.showOrderStagingBatches = false;
+    this.showLtlBatches = false;
     this.showWorkWithBoxes = false;
-    this.showMasterSerialList=false;
-    this.showHazardousChemicals=false;
+    this.showMasterSerialList = false;
+    this.showHazardousChemicals = false;
     this.showSystemComments = false;
-    this.showSerializedInventories=false;
-    this.showCarrierEdiDocuments=false;
-    this.showWorkWithContents=!this.showWorkWithContents;
+    this.showSerializedInventories = false;
+    this.showCarrierEdiDocuments = false;
+    this.showWorkWithContents = !this.showWorkWithContents;
     this.receivablesDisplay = 'none';
     this.receivablesDirection = '';
     this.showAccountProcessing = false;
@@ -2075,8 +2088,7 @@ export class MainNavComponent implements OnInit {
     this.exitPointDirection = '';
     this.moveQueueDisplay = 'none';
     this.moveQueueDirection = '';
-    this.showDockSchedules=false;
-    
+    this.showDockSchedules = false;
 
     if (this.showWorkWithContents == true) {
       this.contentsDisplay = '';
@@ -2086,7 +2098,6 @@ export class MainNavComponent implements OnInit {
       this.contentsDirection = '';
     }
   }
-
 
   showCommodityPrintersSubMenu() {
     this.showreceviceSubmenu = false;
@@ -2311,7 +2322,7 @@ export class MainNavComponent implements OnInit {
     this.showDockSchedules = false;
     this.showLtlBatches = false;
     this.showcampusBuildings = false;
-    this.showCommentSubcodes=!this.showCommentSubcodes;
+    this.showCommentSubcodes = !this.showCommentSubcodes;
     this.ActivityDescriptionDirection = '';
     this.ActivityDescriptionDisplay = 'none';
     this.showCommodityPrinters = false;
@@ -2379,8 +2390,8 @@ export class MainNavComponent implements OnInit {
     this.showDockSchedules = false;
     this.showLtlBatches = false;
     this.showcampusBuildings = false;
-    this.showCommentSubcodes=false;
-    this.showCustomerAddresses=!this.showCustomerAddresses;
+    this.showCommentSubcodes = false;
+    this.showCustomerAddresses = !this.showCustomerAddresses;
     this.ActivityDescriptionDirection = '';
     this.ActivityDescriptionDisplay = 'none';
     this.showCommodityPrinters = false;
@@ -2426,10 +2437,6 @@ export class MainNavComponent implements OnInit {
       this.customerAddressesDirection = '';
     }
   }
-
-
-
-
 
   mouseenter() {
     if (!this.isExpanded) {

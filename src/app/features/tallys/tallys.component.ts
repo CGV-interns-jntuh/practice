@@ -73,26 +73,24 @@ export class TallysComponent implements OnInit {
   });
 
   result: any = [];
-  dataSource:any = [];
-  duplicateSource :any = [];
+  dataSource: any = [];
+  duplicateSource: any = [];
   singleTallyData = [];
   documents = [];
- user:any;
-  building :any;
+  user: any;
+  building: any;
 
- 
+  //  user = localStorage.getItem('userName');
+  // building = localStorage.getItem('building');
 
-//  user = localStorage.getItem('userName');
- // building = localStorage.getItem('building');
-  
   tally: any;
   searchValue: string = '';
   condition: boolean = true;
   prevText: string = '';
-  TALLY_DATA:TallyData=[];
-  loggedUser:any;
+  TALLY_DATA: TallyData = [];
+  loggedUser: any;
   searchTextDisplay = false;
- 
+
   constructor(
     private router: Router,
     public iHeaderSvc: IheaderService,
@@ -102,21 +100,20 @@ export class TallysComponent implements OnInit {
   TallyHeaders: any = [];
   id: number = 0;
   @ViewChild('paginator') paginator!: MatPaginator;
- 
-  ngOnInit(): void {
-    this.loggedUser=localStorage.getItem('LoggedIn');
 
-    if(localStorage.getItem('LoggedIn')){
-        this.user = localStorage.getItem('userName')
-        this.building = localStorage.getItem('building')
-    }else{
-      this.user= GlobalComponent.user;
-      this.building=GlobalComponent.building;
+  ngOnInit(): void {
+    this.loggedUser = localStorage.getItem('LoggedIn');
+
+    if (localStorage.getItem('LoggedIn')) {
+      this.user = localStorage.getItem('userName');
+      this.building = localStorage.getItem('building');
+    } else {
+      this.user = GlobalComponent.user;
+      this.building = GlobalComponent.building;
     }
     this.TallyHeaders = this.iHeaderSvc
       .getAll(this.user, this.building)
       .subscribe((data) => {
-        
         this.result = data;
         this.TallyHeaders = data;
         console.log(data);
@@ -124,24 +121,15 @@ export class TallysComponent implements OnInit {
         console.log(res);
 
         var parsedData = JSON.parse(res);
-       
+
         //this.dataSource = parsedData.returnedData;
-        this.duplicateSource = parsedData.returnedData;;
+        this.duplicateSource = parsedData.returnedData;
         console.log(this.duplicateSource);
-      
 
         this.dataSource = new MatTableDataSource(this.duplicateSource);
         this.dataSource.paginator = this.paginator;
       });
   }
-
- 
-
-  
-
-
-
-  
 
   comment(tally: any) {
     console.log(tally);
@@ -201,7 +189,7 @@ export class TallysComponent implements OnInit {
   }
 
   storer() {
-     this.router.navigate(['tallys/storer']);
+    this.router.navigate(['tallys/storer']);
     // this.matDialog.open(TallyEventComponent, {
     //   width: '1350px',
     //   maxHeight: '350vh',
@@ -219,24 +207,22 @@ export class TallysComponent implements OnInit {
     alert('Record deleted successfully.');*/
 
     this.matDialog.open(TallyDetailDeleteComponent, {
-      "width": '1000px',
-      "maxHeight": '80vh',
-   
-      "data": tally,
-      "autoFocus": false
+      width: '1000px',
+      maxHeight: '80vh',
+
+      data: tally,
+      autoFocus: false,
     });
   }
 
-  tallyDetailUpdate(tally: any){
-    
+  tallyDetailUpdate(tally: any) {
     this.matDialog.open(TallyDetailUpdateComponent, {
-      "width": '1250px',
-      "maxHeight": '180vh',
-   
-      "data": tally,
-      "autoFocus": false
-    });
+      width: '1250px',
+      maxHeight: '180vh',
 
+      data: tally,
+      autoFocus: false,
+    });
   }
 
   getTallyBySearch(tally: any) {
@@ -247,7 +233,7 @@ export class TallysComponent implements OnInit {
     if (tally.tally == '') {
       tal = this.duplicateSource;
     } else {
-      this.duplicateSource.forEach((element:any) => {
+      this.duplicateSource.forEach((element: any) => {
         console.log('*******  ******' + element);
 
         if (element['IHTALY'] == tally.tally) {
@@ -289,8 +275,8 @@ export class TallysComponent implements OnInit {
         console.log(res);
         var parsedData = JSON.parse(res);
         console.log(parsedData);
-       // this.dataSource = parsedData.returnedData;
-       this.dataSource =  new MatTableDataSource(parsedData.returnedData);
+        // this.dataSource = parsedData.returnedData;
+        this.dataSource = new MatTableDataSource(parsedData.returnedData);
         console.log('Result : ' + this.dataSource);
         console.log('DaTA');
         console.log(tal);
@@ -323,7 +309,6 @@ export class TallysComponent implements OnInit {
   }
 
   tallyDetailsCreate() {
-   
     this.matDialog.open(MaintainComponent, {
       width: '1000px',
       maxHeight: '80vh',
@@ -332,7 +317,7 @@ export class TallysComponent implements OnInit {
   }
 
   tallyDetails(element: any) {
-    this.router.navigate(['/main-nav/tallys/details',element]);
+    this.router.navigate(['/main-nav/tallys/details', element]);
     // this.matDialog.open(TallyDetailWorkComponent, {
     //   width: '950px',
     //   height: 'auto',
@@ -401,12 +386,9 @@ export class TallysComponent implements OnInit {
     this.router.navigate(['/main-nav/tallys/add']);
   }
 
-  searchTally()
-  {
-    if(this.searchTextDisplay==true)
-    this.searchTextDisplay=false;
-    else
-this.searchTextDisplay=true;
+  searchTally() {
+    if (this.searchTextDisplay == true) this.searchTextDisplay = false;
+    else this.searchTextDisplay = true;
   }
   result1: any;
   tallyId: any;
@@ -429,31 +411,31 @@ this.searchTextDisplay=true;
         this.result = data;
         console.log(this.result);
 
-        if(JSON.parse(this.result[0].data[1].value).success){
+        if (JSON.parse(this.result[0].data[1].value).success) {
           //alert('Record Created SuccessFully');
-         const msg= JSON.parse(this.result[0].data[1].value).returnedData.message;
-          this.successMessage(msg)
+          const msg = JSON.parse(this.result[0].data[1].value).returnedData
+            .message;
+          this.successMessage(msg);
           //this. getTallyBySearch2(tally-1);
-         // this.router.navigate(['/main-nav/tallys/read']);
-       }else{
-        const msg= JSON.parse(this.result[0].data[1].value).returnedData.message;
-        this.failureMessage(msg);
-       }
-
-        
+          // this.router.navigate(['/main-nav/tallys/read']);
+        } else {
+          const msg = JSON.parse(this.result[0].data[1].value).returnedData
+            .message;
+          this.failureMessage(msg);
+        }
       });
     //alert('Record deleted successfully.');
   }
 
-  successMessage(msg:any){
-    Swal.fire(msg,'','success');
+  successMessage(msg: any) {
+    Swal.fire(msg, '', 'success');
     this.router.navigate(['/main-nav']);
-   // this.router.navigate(['/main-nav/tallys/read']);
+    // this.router.navigate(['/main-nav/tallys/read']);
   }
 
-  failureMessage(msg:any){
-    Swal.fire(msg,'','error');
-   // this.router.navigate(['/main-nav/tallys/read']);
+  failureMessage(msg: any) {
+    Swal.fire(msg, '', 'error');
+    // this.router.navigate(['/main-nav/tallys/read']);
   }
 
   // getCommnet(tally: any) {

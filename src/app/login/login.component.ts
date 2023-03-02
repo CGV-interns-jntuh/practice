@@ -30,17 +30,19 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void { }
   login(): void {
     // console.log(this.loginForm.value.username);
-    // console.log(this.loginForm.value.password);
+    //console.log(this.loginForm.value.password);
     let username = this.loginForm.value.username;
     console.log(username);
+    
+    
     let password = this.loginForm.value.password;
+    console.log(password)
     let userData = { username: username, password: password };
     this.loggedInUser = this.loginSvc
       .Login(userData)
       //  .pipe(first())
       .subscribe({
         next: (data) => {
-
           console.log('received data : ', data);
           this.loggedInUser = data.username;
           this.userName=data.username;
